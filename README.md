@@ -4,19 +4,20 @@ Simple user registration using Firebase.
 
 Welcome screen
 
-![Welcome](https://user-images.githubusercontent.com/102160659/161775248-8c486011-162d-4d73-a9b1-7fc02d391540.png)
+![Welcome](https://user-images.githubusercontent.com/102160659/161776080-076d01da-4d23-492a-8daf-a7d52728274e.png)
 
 Login screen
 
-![Login](https://user-images.githubusercontent.com/102160659/161775306-3e1fa6df-844e-474f-8ade-0f9f1e9b02e7.png)
+![Login](https://user-images.githubusercontent.com/102160659/161776103-22196f49-74cc-4ac5-b9a3-ff27b72a3999.png)
+
 
 Register screen
 
-![Register](https://user-images.githubusercontent.com/102160659/161775364-abbdd028-31b8-43e2-b8df-6fa7ae0c6682.png)
+![Register](https://user-images.githubusercontent.com/102160659/161776158-31d67d17-2d97-4374-8abc-c9763721bc63.png)
 
 Reset password screen
 
-![ResetPassword](https://user-images.githubusercontent.com/102160659/161775399-6668d418-c2e4-4ebc-b71e-cd4373e73f1e.png)
+![ResetPassword](https://user-images.githubusercontent.com/102160659/161776198-07374579-0248-48cb-ae56-3d67d60a0140.png)
 
 Login with Facebook demo
 
