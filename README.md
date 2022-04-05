@@ -2,6 +2,10 @@
 
 Simple user registration using Firebase.
 
+Registration and user input checks demo
+
+![RegistrationChecks](https://user-images.githubusercontent.com/102160659/161814671-a363d55a-16f0-49a6-9bb0-03c9b8b3d4b0.gif)
+
 Welcome screen
 
 ![Welcome](https://user-images.githubusercontent.com/102160659/161776080-076d01da-4d23-492a-8daf-a7d52728274e.png)
@@ -25,7 +29,3 @@ Login with Facebook demo
 Login with Google demo
 
 ![LoginWithGoogle](https://user-images.githubusercontent.com/102160659/161809615-6a9f592a-b4b6-4590-839f-507cc2cdf668.gif)
-
-Registration and user input checks demo
-
-![RegistrationChecks](https://user-images.githubusercontent.com/102160659/161814671-a363d55a-16f0-49a6-9bb0-03c9b8b3d4b0.gif)
