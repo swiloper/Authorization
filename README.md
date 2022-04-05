@@ -10,7 +10,6 @@ Login screen
 
 ![Login](https://user-images.githubusercontent.com/102160659/161776103-22196f49-74cc-4ac5-b9a3-ff27b72a3999.png)
 
-
 Register screen
 
 ![Register](https://user-images.githubusercontent.com/102160659/161776158-31d67d17-2d97-4374-8abc-c9763721bc63.png)
@@ -21,8 +20,8 @@ Reset password screen
 
 Login with Facebook demo
 
-![LoginWithFacebook](https://user-images.githubusercontent.com/102160659/161775457-ed6b8636-31e9-43d2-99a3-2fc6f22a9b7d.gif)
+![LoginWithFacebook](https://user-images.githubusercontent.com/102160659/161809565-cf6edd62-b0ca-4ffa-b0e7-3fb44fe72f29.gif)
 
 Login with Google demo
 
-![LoginWithGoogle](https://user-images.githubusercontent.com/102160659/161775517-6cb2f9ea-59e8-4246-9ac4-afe4e90631bc.gif)
+![LoginWithGoogle](https://user-images.githubusercontent.com/102160659/161809615-6a9f592a-b4b6-4590-839f-507cc2cdf668.gif)
