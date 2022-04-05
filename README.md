@@ -26,7 +26,3 @@ Login with Facebook demo
 Login with Google demo
 
 ![LoginWithGoogle](https://user-images.githubusercontent.com/102160659/161775517-6cb2f9ea-59e8-4246-9ac4-afe4e90631bc.gif)
-
-Registration and user input checks demo
-
-Uploading RegistrationChecks.mp4…
