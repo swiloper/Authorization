@@ -17,8 +17,8 @@ class LogoutViewController: UIViewController {
         do {
           try Auth.auth().signOut()
         } catch let signOutError as NSError {
-          print ("Error signing out: \(signOutError)")
+            present(ErrorAlert.createController(message: signOutError.localizedDescription), animated: true)
         }
-        performSegue(withIdentifier: "unwindToWelcomeController", sender: self)
+        performSegue(withIdentifier: "unwindToWelcomeControllerLogoutController", sender: self)
     }
 }

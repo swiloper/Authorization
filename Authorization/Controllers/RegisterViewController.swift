@@ -52,17 +52,32 @@ class RegisterViewController: UIViewController {
         
         if textField.tag == 2 {
             let checkResult = text.checkName()
-            checkResult.isEmpty ? textField.validAppearance() : textField.invalidAppearance(descriptionLabel: nameDescriptionLabel, text: checkResult)
+            if checkResult.isEmpty {
+                textField.validAppearance()
+                nameDescriptionLabel.defaultText()
+            } else {
+                textField.invalidAppearance(descriptionLabel: nameDescriptionLabel, text: checkResult)
+            }
         } else if textField.tag == 3 {
             let checkResult = text.checkEmail()
-            checkResult.isEmpty ? textField.validAppearance() : textField.invalidAppearance(descriptionLabel: emailDescriptionLabel, text: checkResult)
+            if checkResult.isEmpty {
+                textField.validAppearance()
+                emailDescriptionLabel.defaultText()
+            } else {
+                textField.invalidAppearance(descriptionLabel: emailDescriptionLabel, text: checkResult)
+            }
         } else {
             let checkResult = text.checkPassword()
-            checkResult.isEmpty ? textField.validAppearance() : textField.invalidAppearance(descriptionLabel: passwordDescriptionLabel, text: checkResult)
+            if checkResult.isEmpty {
+                textField.validAppearance()
+                emailDescriptionLabel.defaultText()
+            } else {
+                textField.invalidAppearance(descriptionLabel: passwordDescriptionLabel, text: checkResult)
+            }
         }
     }
     
-    // MARK: - IBActions
+    // MARK: IBActions
     
     @IBAction func registerAction(_ sender: UIButton) {
         checkTextFieldInput(nameTextField)
@@ -76,17 +91,21 @@ class RegisterViewController: UIViewController {
     func registerUser() {
         if let name = nameTextField.text, let email = emailTextField.text, let password = passwordTextField.text {
             Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-                if error == nil {
+                if let error = error {
+                    self.present(ErrorAlert.createController(message: error.localizedDescription), animated: true)
+                } else {
                     if let result = result {
                         let ref = Database.database().reference().child("users")
                         ref.child(result.user.uid).updateChildValues(["name": name, "email": email])
                         let logoutController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogoutViewController")
                         logoutController.modalPresentationStyle = .fullScreen
-                        self.present(logoutController, animated: true)
-                    }
-                } else {
-                    if let error = error {
-                        self.emailTextField.invalidAppearance(descriptionLabel: self.emailDescriptionLabel, text: error.localizedDescription)
+                        Auth.auth().currentUser?.sendEmailVerification(completion: { error in
+                            if let error = error {
+                                self.present(ErrorAlert.createController(message: error.localizedDescription), animated: true)
+                            } else {
+                                self.present(logoutController, animated: true)
+                            }
+                        })
                     }
                 }
             }
@@ -98,17 +117,20 @@ class RegisterViewController: UIViewController {
     }
 }
 
-// MARK: - UITextFieldDelegate
+// MARK: UITextFieldDelegate
 
 extension RegisterViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         switch textField.tag {
         case 2:
-            textField.defaultAppearance(descriptionLabel: nameDescriptionLabel)
+            textField.defaultAppearance()
+            nameDescriptionLabel.defaultText()
         case 3:
-            textField.defaultAppearance(descriptionLabel: emailDescriptionLabel)
+            textField.defaultAppearance()
+            emailDescriptionLabel.defaultText()
         case 4:
-            textField.defaultAppearance(descriptionLabel: passwordDescriptionLabel)
+            textField.defaultAppearance()
+            passwordDescriptionLabel.defaultText()
         default:
             return false
         }

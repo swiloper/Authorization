@@ -26,14 +26,26 @@ class LoginViewController: UIViewController {
         guard let text = textField.text else {
             return
         }
-        if text.isEmpty {
-            textField.tag == 0 ? textField.invalidAppearance(descriptionLabel: emailDescriptionLabel, text: "The field for entering an email cannot be empty.") : textField.invalidAppearance(descriptionLabel: passwordDescriptionLabel, text: "The field for entering an password cannot be empty.")
+        if textField.tag == 0 {
+            let checkResult = text.checkEmail()
+            if checkResult.isEmpty {
+                textField.validAppearance()
+                emailDescriptionLabel.defaultText()
+            } else {
+                textField.invalidAppearance(descriptionLabel: emailDescriptionLabel, text: checkResult)
+            }
         } else {
-            textField.validAppearance()
+            let checkResult = text.checkPassword()
+            if checkResult.isEmpty {
+                textField.validAppearance()
+                emailDescriptionLabel.defaultText()
+            } else {
+                textField.invalidAppearance(descriptionLabel: passwordDescriptionLabel, text: checkResult)
+            }
         }
     }
     
-    // MARK: - IBActions
+    // MARK: IBActions
     
     @IBAction func loginAction(_ sender: UIButton) {
         checkTextFieldInput(emailTextField)
@@ -46,6 +58,12 @@ class LoginViewController: UIViewController {
     func loginUser() {
         if let email = emailTextField.text, let password = passwordTextField.text {
             Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+                if let result = result {
+                    if !result.user.isEmailVerified {
+                        self.emailTextField.invalidAppearance(descriptionLabel: self.emailDescriptionLabel, text: "You need to confirm your email.")
+                        return
+                    }
+                }
                 if error == nil {
                     let logoutController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogoutViewController")
                     logoutController.modalPresentationStyle = .fullScreen
@@ -57,7 +75,7 @@ class LoginViewController: UIViewController {
                         } else if error.localizedDescription == "The password is invalid or the user does not have a password." {
                             self.passwordTextField.invalidAppearance(descriptionLabel: self.passwordDescriptionLabel, text: "The entered password is not correct.")
                         } else {
-                            self.emailTextField.invalidAppearance(descriptionLabel: self.emailDescriptionLabel, text: error.localizedDescription)
+                            self.present(ErrorAlert.createController(message: error.localizedDescription), animated: true)
                         }
                     }
                 }
@@ -70,15 +88,17 @@ class LoginViewController: UIViewController {
     }
 }
 
-// MARK: - UITextFieldDelegate
+// MARK: UITextFieldDelegate
 
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         switch textField.tag {
         case 0:
-            textField.defaultAppearance(descriptionLabel: emailDescriptionLabel)
+            textField.defaultAppearance()
+            emailDescriptionLabel.defaultText()
         case 1:
-            textField.defaultAppearance(descriptionLabel: passwordDescriptionLabel)
+            textField.defaultAppearance()
+            passwordDescriptionLabel.defaultText()
         default:
             return false
         }

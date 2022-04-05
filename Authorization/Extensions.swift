@@ -8,34 +8,11 @@
 import UIKit
 
 extension UITextField {
-    func defaultAppearance(descriptionLabel: UILabel) {
-        let loginEmailDescriptionLabelDefaultText = "Enter the email you specified when registering."
-        let loginPasswordDescriptionLabelDefaultText = "The password must be the same as the one specified when registering the corresponding user."
-        
-        let registerNameDescriptionLabelDefaultText = "Please enter your first and last name in English."
-        let registerEmailDescriptionLabelDefaultText = "Please enter an email address where a confirmation email will be sent."
-        let registerPasswordDescriptionLabelDefaultText = "Password must be at least 6 characters, contain numbers, Latin letters and special characters."
-        
+    func defaultAppearance() {
         if let lightBlueColor = UIColor.init(named: "lightBlue") {
             layer.borderWidth = 1.0
             layer.borderColor = lightBlueColor.cgColor
             backgroundColor = lightBlueColor
-            descriptionLabel.textColor = .darkGray
-            
-            switch tag {
-            case 0:
-                descriptionLabel.text = loginEmailDescriptionLabelDefaultText
-            case 1:
-                descriptionLabel.text = loginPasswordDescriptionLabelDefaultText
-            case 2:
-                descriptionLabel.text = registerNameDescriptionLabelDefaultText
-            case 3:
-                descriptionLabel.text = registerEmailDescriptionLabelDefaultText
-            case 4:
-                descriptionLabel.text = registerPasswordDescriptionLabelDefaultText
-            default:
-                break
-            }
         }
     }
     
@@ -89,7 +66,39 @@ extension UITextField {
     }
 }
 
-// MARK: - String extension
+extension UILabel {
+    func defaultText() {
+        let loginEmailDescriptionLabelDefaultText = "Enter the email you specified when registering."
+        let loginPasswordDescriptionLabelDefaultText = "The password must be the same as the one specified when registering the corresponding user."
+        
+        let registerNameDescriptionLabelDefaultText = "Please enter your first and last name in English."
+        let registerEmailDescriptionLabelDefaultText = "Please enter an email address where a confirmation email will be sent."
+        let registerPasswordDescriptionLabelDefaultText = "Password must be at least 6 characters, contain numbers, Latin letters and special characters."
+        
+        let resetPasswordDescriptionLabelDefaultText = "Enter the email address to which the letter with further actions will be sent."
+        
+        textColor = .darkGray
+        
+        switch tag {
+        case 0:
+            text = loginEmailDescriptionLabelDefaultText
+        case 1:
+            text = loginPasswordDescriptionLabelDefaultText
+        case 2:
+            text = registerNameDescriptionLabelDefaultText
+        case 3:
+            text = registerEmailDescriptionLabelDefaultText
+        case 4:
+            text = registerPasswordDescriptionLabelDefaultText
+        case 5:
+            text = resetPasswordDescriptionLabelDefaultText
+        default:
+            break
+        }
+    }
+}
+
+// MARK: String extension
 
 extension String {
     func checkName() -> String {
@@ -191,9 +200,7 @@ extension String {
         let maxPasswordLength = 50
         
         // Regular expressions
-        let latinCapitalLetters = "[A-Z]+"
         let numbers = "[0-9]+"
-        let specialCharacters = "[!#$%&'*+-/=?^_`{|}()@:;<>~]+"
         let notAllowedCharacters = "[^a-zA-Z0-9!#$%&'*+-/=?^_`{|}()@:;<>~]+"
         var error = String()
         
@@ -206,14 +213,8 @@ extension String {
         if matches(notAllowedCharacters) {
             return "Contains not allowed characters."
         }
-        if !matches(latinCapitalLetters) {
-            error += "There must be at least one capital Latin letter. "
-        }
         if !matches(numbers) {
             error += "There are no numbers. "
-        }
-        if !matches(specialCharacters) {
-            error += "Your input must contain at least one special character. "
         }
         return error
     }
