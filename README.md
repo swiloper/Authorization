@@ -6,6 +6,8 @@ Demonstration project of registration and login, using the Firebase framework, a
 
 The project includes user input checks, both during registration and login, the difference between them is that the login also checks whether the correct password is entered and whether such a user exists.
 
+There is also a mechanism for sending e-mails to confirm registration and to recover the password using Firebase.
+
 ![RegistrationChecks](https://user-images.githubusercontent.com/102160659/161814671-a363d55a-16f0-49a6-9bb0-03c9b8b3d4b0.gif)
 
 Login with Facebook demo
