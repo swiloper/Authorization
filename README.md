@@ -2,7 +2,9 @@
 
 Simple user registration using Firebase.
 
-Registration and user input checks demo. This is almost the same as logging in a user, but the login also checks to see if the user with that email exists in Firebase and if the correct password is entered.
+Demonstration project of registration and login, using the Firebase framework, as well as frameworks from Facebook and Google to log in through their services.
+
+The project includes user input checks, both during registration and login, the difference between them is that the login also checks whether the correct password is entered and whether such a user exists.
 
 ![RegistrationChecks](https://user-images.githubusercontent.com/102160659/161814671-a363d55a-16f0-49a6-9bb0-03c9b8b3d4b0.gif)
 
